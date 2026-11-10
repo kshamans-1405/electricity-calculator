@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Electricity Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- The meter: always visible, shows this month's units and bill -->
+  <header class="meter-bar">
+    <h1 class="brand">Electricity calculator</h1>
+    <div class="reading">
+      <div class="reading-label">Units this month (kWh)</div>
+      <div id="odometer" class="odometer" role="img" aria-label="0.0 kilowatt-hours"></div>
+    </div>
+    <div class="reading">
+      <div class="reading-label">Estimated bill</div>
+      <div id="bill" class="bill-amount">₹0.00</div>
+    </div>
+    <a id="downloadBtn" class="btn btn-on-dark" href="/api/report" download>Download report</a>
+  </header>
+
+  <nav class="tabs" id="tabs" aria-label="Sections">
+    <button type="button" data-view="appliances" class="active">Appliances</button>
+    <button type="button" data-view="breakdown">Usage breakdown</button>
+    <button type="button" data-view="savings">Savings</button>
+    <button type="button" data-view="whatif">What-if</button>
+    <button type="button" data-view="tariff">Tariff</button>
+  </nav>
+
+  <main>
+
+    <section id="view-appliances" class="view">
+      <h2>Add an appliance</h2>
+      <form id="addForm" class="panel form-grid" autocomplete="off">
+        <label class="wide">Common appliances
+          <select id="preset"></select>
+        </label>
+        <label>Name
+          <input id="name" type="text" maxlength="40" required>
+        </label>
+        <label>Power (watts)
+          <input id="watts" type="number" min="1" max="10000" step="any" required>
+        </label>
+        <label>Hours per day
+          <input id="hours" type="number" min="0.1" max="24" step="any" required>
+        </label>
+        <label>Quantity
+          <input id="quantity" type="number" min="1" max="100" step="1" value="1" required>
+        </label>
+        <button class="btn btn-primary" type="submit">Add appliance</button>
+      </form>
+      <p id="presetTip" class="hint"></p>
+
+      <h2>Your appliances</h2>
+      <div id="applianceList"></div>
+    </section>
+
+    <section id="view-breakdown" class="view" hidden>
+      <div id="breakdownBody"></div>
+    </section>
+
+    <section id="view-savings" class="view" hidden>
+      <h2>Ways to save</h2>
+      <div id="savingsBody"></div>
+    </section>
+
+    <section id="view-whatif" class="view" hidden>
+      <h2>Try a change</h2>
+      <p class="hint">Change the hours or quantity of one appliance and compare the bills. Your appliance list stays as it is.</p>
+      <div id="whatifEmpty"></div>
+      <form id="whatifForm" class="panel form-grid" hidden>
+        <label class="wide">Appliance
+          <select id="whatifAppliance"></select>
+        </label>
+        <label>New hours per day
+          <input id="whatifHours" type="number" min="0.1" max="24" step="any" required>
+        </label>
+        <label>New quantity
+          <input id="whatifQty" type="number" min="1" max="100" step="1" required>
+        </label>
+        <button class="btn btn-primary" type="submit">Compare bills</button>
+      </form>
+      <div id="whatifResult"></div>
+    </section>
+
+    <section id="view-tariff" class="view" hidden>
+      <h2>Tariff slabs</h2>
+      <p class="hint">Enter the slabs from your electricity board's tariff so the bill matches your real one. The sample slabs are only for demonstration.</p>
+      <form id="tariffForm" class="panel">
+        <div id="slabRows"></div>
+        <div class="row-actions">
+          <button type="button" class="btn btn-quiet" id="addSlab">Add slab</button>
+        </div>
+        <label class="fixed">Fixed monthly charge (₹)
+          <input id="fixedCharge" type="number" min="0" step="any" value="0">
+        </label>
+        <div class="row-actions">
+          <button class="btn btn-primary" type="submit">Save tariff</button>
+          <button type="button" class="btn btn-quiet" id="resetTariff">Use sample slabs</button>
+        </div>
+      </form>
+    </section>
+
+  </main>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>

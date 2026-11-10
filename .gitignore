@@ -1,0 +1,14 @@
+# compiled files
+bin/
+out/
+*.class
+
+# IDE settings (each person has their own)
+.classpath
+.project
+.settings/
+.vscode/
+.idea/
+
+# files the programs create
+report.txt
