@@ -45,8 +45,3 @@ The Java classes do all the calculations. The page only displays results and sen
 - Run `git pull` before you start and before you push.
 - The slab rates in `Tariff()` are sample values. Use your state's real tariff for a real bill.
 
-## Team
--Kshama Puranik N.S<br>
--Konkala Samhitha <br>
--Kusuma R <br>
--Lanchana <br>
