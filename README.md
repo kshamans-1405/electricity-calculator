@@ -65,7 +65,7 @@ Open the local URL displayed in the terminal in your browser.
 
 The default address is:
 
-http://localhost:8080/
+http://localhost:8081/
 
 If that port is already occupied, the application may start on another available port.
 
