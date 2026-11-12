@@ -1,47 +1,119 @@
 # Electricity Consumption and Savings Calculator
 
-A Java web app that calculates a household's monthly electricity units and bill from its appliances, shows where the units go, suggests ways to save with the rupee amount for each, and compares the bill before and after a change.
+A Java web application that calculates a household's monthly electricity consumption and bill based on its appliances. It provides usage breakdowns, savings suggestions with estimated rupee savings, what-if comparisons, and seasonal electricity consumption estimates.
 
 ## Features
-- Add appliances (name, watts, hours per day, quantity)
-- Monthly units and bill using editable slab rates and a fixed charge
-- Usage breakdown and a slab-by-slab bill table
-- Savings suggestions ranked by rupees saved
-- What-if comparison that never changes your real list
-- Download a text report
 
-## How to run
-You need JDK 17 or later. Run all commands from the project folder (the one that contains `src` and `web`).
+### 1. Electricity Consumption Calculator
+- Add appliances (name, watts, hours per day, quantity).
+- Calculate monthly electricity consumption in units.
+- Calculate electricity bills using editable slab rates and a fixed charge.
+- Display appliance-wise usage breakdown.
+- Show a slab-by-slab bill calculation.
 
-**In Eclipse:** File → New → Java Project, untick "Use default location", browse to this folder, untick "Create module-info.java", then right-click `src/electricity/WebApp.java` → Run As → Java Application.
+### 2. Savings Analyzer
+- Suggest ways to reduce electricity consumption.
+- Rank savings suggestions based on estimated rupees saved.
+- Display the potential savings for each suggestion.
 
-**From a terminal:**
+### 3. What-If Comparison
+- Compare electricity bills before and after changing appliance usage.
+- Estimate the savings from proposed changes.
+- Perform comparisons without modifying the original appliance list.
 
-```
+### 4. Seasonal Consumption Estimator
+- Select a season: Summer, Winter, or Rainy.
+- Adjust appliance usage hours according to predefined seasonal patterns.
+- Calculate daily and monthly electricity consumption for each appliance.
+- Estimate the total household monthly consumption.
+- Calculate estimated monthly electricity bills using the existing slab tariff.
+- Compare electricity consumption and estimated bills across all three seasons.
+- Display appliance-wise consumption and seasonal differences.
+
+### 5. Downloadable Report
+- Generate and download a text report containing electricity consumption and bill details.
+
+## How to Run
+
+You need **JDK 17 or later**.
+
+Run all commands from the project folder (the folder containing `src` and `web`).
+
+### Using Eclipse
+
+1. Select File → New → Java Project.
+2. Untick "Use default location" and browse to this project folder.
+3. Untick "Create module-info.java".
+4. Right-click `src/electricity/WebApp.java`.
+5. Select Run As → Java Application.
+
+### Using a Terminal
+
+Compile the Java files:
+
+```bash
 javac -d out src/electricity/*.java
+```
+
+Start the web application:
+
+```bash
 java -cp out electricity.WebApp
 ```
 
-The app opens in your browser at http://localhost:8080/. Stop it with the Stop button in Eclipse, or Ctrl+C in the terminal.
+Open the local URL displayed in the terminal in your browser.
 
-There is also a console version: run `electricity.Main`.
+The default address is:
 
-## Project structure
+http://localhost:8080/
+
+If that port is already occupied, the application may start on another available port.
+
+To stop the application, press Ctrl+C in the terminal or use the Stop button in Eclipse.
+
+### Console Version
+
+To run the console-based application:
+
+```bash
+java -cp out electricity.Main
+```
+
+## Project Structure
+
 | Part | What it does |
-| --- | --- |
-| `Appliance` | One appliance and its monthly units |
-| `Tariff` | Slab rates and the bill calculation |
-| `BillCalculator` | The appliance list, total units and bill |
-| `SavingsAnalyzer`, `Suggestion` | Ranking, savings tips, what-if |
-| `WhatIfResult` | Result of a what-if comparison |
-| `ReportWriter` | Builds the text report |
-| `WebApp` | Small web server that connects the classes to the page |
-| `web/` | The page: `index.html`, `style.css`, `app.js` |
+|---|---|
+| `Appliance` | Represents an appliance and calculates its monthly units. |
+| `Tariff` | Stores slab rates and performs bill calculations. |
+| `BillCalculator` | Manages appliances, total units, and electricity bills. |
+| `SavingsAnalyzer` | Analyses consumption and generates savings suggestions. |
+| `Suggestion` | Represents an electricity-saving suggestion. |
+| `WhatIfResult` | Stores the results of what-if comparisons. |
+| `ReportWriter` | Generates downloadable text reports. |
+| `SeasonalConsumptionEstimator` | Estimates and compares electricity consumption across different seasons. |
+| `WebApp` | Provides the web server and connects Java classes to the frontend. |
+| `web/index.html` | Defines the web application's structure. |
+| `web/style.css` | Handles the application's styling. |
+| `web/app.js` | Handles user interactions and displays results. |
 
-The Java classes do all the calculations. The page only displays results and sends form values to `WebApp`.
+## Technologies Used
 
-## Working on this project
-- Create a branch for each change (`git checkout -b your-change`) and open a pull request.
-- Run `git pull` before you start and before you push.
-- The slab rates in `Tariff()` are sample values. Use your state's real tariff for a real bill.
+- **Java 17** – Backend calculations and application logic.
+- **HTML** – Web page structure.
+- **CSS** – User interface styling.
+- **JavaScript** – Frontend interactions and communication with the backend.
+- **Java HTTP Server** – Handles web requests and connects the frontend with Java classes.
 
+## Working on This Project
+
+- Create a separate Git branch for each new feature or change.
+- Pull the latest changes before starting development.
+- Test your changes locally before committing.
+- Commit and push your changes to your branch.
+- Open a Pull Request for review and merging into the main branch.
+
+## Note
+
+The slab rates in `Tariff()` are sample values. Use your state's actual electricity tariff for a real bill.
+
+The Seasonal Consumption Estimator uses predefined seasonal appliance usage patterns. Its results are estimates and may differ from actual household consumption.
