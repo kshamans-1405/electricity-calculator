@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +9,7 @@
 </head>
 <body>
 
-  <!-- The meter: always visible, shows this month's units and bill -->
+  <!-- Electricity meter -->
   <header class="meter-bar">
     <h1 class="brand">Electricity calculator</h1>
     <div class="reading">
@@ -22,16 +23,19 @@
     <a id="downloadBtn" class="btn btn-on-dark" href="/api/report" download>Download report</a>
   </header>
 
+  <!-- Navigation -->
   <nav class="tabs" id="tabs" aria-label="Sections">
     <button type="button" data-view="appliances" class="active">Appliances</button>
     <button type="button" data-view="breakdown">Usage breakdown</button>
     <button type="button" data-view="savings">Savings</button>
     <button type="button" data-view="whatif">What-if</button>
     <button type="button" data-view="tariff">Tariff</button>
+    <button type="button" data-view="seasonal">Seasonal estimator</button>
   </nav>
 
   <main>
 
+    <!-- Appliances -->
     <section id="view-appliances" class="view">
       <h2>Add an appliance</h2>
       <form id="addForm" class="panel form-grid" autocomplete="off">
@@ -58,15 +62,18 @@
       <div id="applianceList"></div>
     </section>
 
+    <!-- Usage breakdown -->
     <section id="view-breakdown" class="view" hidden>
       <div id="breakdownBody"></div>
     </section>
 
+    <!-- Savings -->
     <section id="view-savings" class="view" hidden>
       <h2>Ways to save</h2>
       <div id="savingsBody"></div>
     </section>
 
+    <!-- What-if -->
     <section id="view-whatif" class="view" hidden>
       <h2>Try a change</h2>
       <p class="hint">Change the hours or quantity of one appliance and compare the bills. Your appliance list stays as it is.</p>
@@ -86,6 +93,7 @@
       <div id="whatifResult"></div>
     </section>
 
+    <!-- Tariff -->
     <section id="view-tariff" class="view" hidden>
       <h2>Tariff slabs</h2>
       <p class="hint">Enter the slabs from your electricity board's tariff so the bill matches your real one. The sample slabs are only for demonstration.</p>
@@ -102,6 +110,31 @@
           <button type="button" class="btn btn-quiet" id="resetTariff">Use sample slabs</button>
         </div>
       </form>
+    </section>
+
+    <!-- Seasonal consumption estimator -->
+    <section id="view-seasonal" class="view" hidden>
+      <h2>Seasonal consumption estimator</h2>
+      <p class="hint">
+        Compare your household's estimated electricity consumption and monthly bill
+        during Summer, Winter and Rainy seasons. Seasonal appliance hours are
+        adjusted using predefined usage patterns.
+      </p>
+
+      <form id="seasonalForm" class="panel form-grid">
+        <label class="wide">Select season
+          <select id="seasonSelect" required>
+            <option value="SUMMER">Summer</option>
+            <option value="WINTER">Winter</option>
+            <option value="RAINY">Rainy</option>
+          </select>
+        </label>
+        <button class="btn btn-primary" type="submit">Calculate seasonal consumption</button>
+      </form>
+
+      <div id="seasonalEmpty"></div>
+      <div id="seasonalResult"></div>
+      <div id="seasonalComparison"></div>
     </section>
 
   </main>
